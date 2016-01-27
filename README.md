@@ -11,6 +11,12 @@ Highlight.js plugin for display language of syntax highlight.
 npm i highlightjs-lang.js
 ```
 
+#### Bower
+```
+bower install highlightjs-lang
+```
+
+
 ## Usage
 
 Download plugin and include file after highlight.js:

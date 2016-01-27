@@ -1,0 +1,20 @@
+{
+  "name": "highlightjs-lang.js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/wcoder/highlightjs-lang.js.git",
+  "authors": [
+    "Yauheni Pakala <evgeniy.pakalo@gmail.com>"
+  ],
+  "description": "Highlight.js plugin for display language of syntax highlight.",
+  "keywords": [
+    "highlight"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
