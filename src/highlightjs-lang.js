@@ -4,18 +4,18 @@
 	if (typeof w.hljs === 'undefined') {
 		console.error('highlight.js not detected!');
 	} else {
-		w.hljs.initLineNumbersOnLoad = initLineNumbersOnLoad;
-		w.hljs.lineNumbersBlock = lineNumbersBlock;
+		w.hljs.initLangOnLoad = initLangOnLoad;
+		w.hljs.initLangBlock = initLangBlock;
 	}
 
-	function initLineNumbersOnLoad () {
+	function initLangOnLoad () {
 		w.addEventListener('load', function () {
 			try {
 				var blocks = document.querySelectorAll('code.hljs');
 
 				for (var i in blocks) {
 					if (blocks.hasOwnProperty(i)) {
-						lineNumbersBlock(blocks[i]);
+						initLangBlock(blocks[i]);
 					}
 				}
 			} catch (e) {
@@ -24,7 +24,7 @@
 		});
 	}
 
-	function lineNumbersBlock (element) {
+	function initLangBlock (element) {
 		if (typeof element !== 'object') return;
 
 		var classes = element.className.split(' ');
