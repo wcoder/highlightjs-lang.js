@@ -2,6 +2,15 @@
 
 Highlight.js plugin for display language of syntax highlight.
 
+[DEMO](http://wcoder.github.io/highlightjs-lang.js/)
+
+## Install
+
+#### Npm
+```
+npm i highlightjs-lang.js
+```
+
 ## Usage
 
 Download plugin and include file after highlight.js:
