@@ -1,7 +1,7 @@
 {
   "name": "highlightjs-lang.js",
   "version": "1.0.0",
-  "description": "Highlight.js plugin for show of used syntax language.",
+  "description": "Highlight.js plugin for display language of syntax highlight.",
   "main": "gulpfile.js",
   "dependencies": {},
   "devDependencies": {
