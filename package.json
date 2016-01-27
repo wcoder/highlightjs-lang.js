@@ -1,0 +1,25 @@
+{
+  "name": "highlightjs-lang.js",
+  "version": "1.0.0",
+  "description": "Highlight.js plugin for show of used syntax language.",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wcoder/highlightjs-lang.js.git"
+  },
+  "author": "Yauheni Pakala <evgeniy.pakalo@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wcoder/highlightjs-lang.js.git/issues"
+  },
+  "homepage": "https://github.com/wcoder/highlightjs-lang.js.git"
+}
