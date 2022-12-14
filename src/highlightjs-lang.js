@@ -46,9 +46,10 @@
 		return '';
 	}
 
+	// TODO: rework this crap
 	function convertLangName(lang)
 	{
-		// TODO: add more
+		// TODO: add more langs
 		var map = [
 			['C#', ['cs', 'csharp']],
 			['F#', ['fsharp']],
