@@ -1,6 +1,6 @@
-# highlightjs-lang.js
+# highlightjs-lang.js [![npm](https://img.shields.io/npm/v/highlightjs-lang.js.svg)](https://www.npmjs.com/package/highlightjs-lang.js) ![npm](https://img.shields.io/npm/dw/highlightjs-lang.js.svg)
 
-Highlight.js plugin for display language of syntax highlight.
+[Highlight.js](https://github.com/highlightjs/highlight.js) plugin for display language of syntax highlight.
 
 [DEMO](http://wcoder.github.io/highlightjs-lang.js/)
 
@@ -16,6 +16,11 @@ npm i highlightjs-lang.js
 bower install highlightjs-lang
 ```
 
+#### Getting the library from CDN
+
+```html
+<script src="//cdn.jsdelivr.net/npm/highlightjs-lang.js@1.0.0/dist/highlightjs-lang.min.js"></script>
+```
 
 ## Usage
 
@@ -26,7 +31,7 @@ Download plugin and include file after highlight.js:
 <script src="path/to/highlightjs-lang.min.js"></script>
 ```
 
-Adding styles:
+Add styles:
 ```css
 .hljs-lang {
 	background: #333;
@@ -56,6 +61,10 @@ $(document).ready(function() {
 	});
 });
 ```
+
+## More plugins
+
+- [highlightjs-line-numbers.js](https://github.com/wcoder/highlightjs-line-numbers.js) — Line numbering plugin.
 
 ---
 &copy; 2015 Yauheni Pakala | MIT License
