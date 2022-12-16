@@ -1,5 +1,13 @@
-(function (w) {
+(function (w, d) {
   'use strict';
+
+  // TODO: add more langs
+  var defaultLangNamesMap = {
+    cs: 'C#',
+    csharp: 'C#',
+    fsharp: 'F#',
+    objectivec: 'Objective-C',
+  };
 
   if (typeof w.hljs === 'undefined') {
     console.error('highlight.js not detected!');
@@ -8,34 +16,84 @@
     w.hljs.initLangBlock = initLangBlock;
   }
 
-  function initLangOnLoad () {
-    w.addEventListener('load', function () {
-      try {
-        var blocks = document.querySelectorAll('code.hljs');
-
-        for (var i in blocks) {
-          if (blocks.hasOwnProperty(i)) {
-            initLangBlock(blocks[i]);
-          }
-        }
-      } catch (e) {
-        console.error('highlight-lang error: ', e);
-      }
-    });
+  function initLangOnLoad (options) {
+    if (d.readyState === 'interactive' || d.readyState === 'complete') {
+      documentReady(options);
+    } else {
+      w.addEventListener('DOMContentLoaded', function () {
+        documentReady(options);
+      });
+    }
   }
 
-  function initLangBlock (element) {
+  function documentReady (options) {
+    try {
+      var blocks = d.querySelectorAll('code.hljs,code.nohighlight');
+
+      for (var i in blocks) {
+        if (blocks.hasOwnProperty(i)) {
+          if (!isPluginDisabledForBlock(blocks[i])) {
+            initLangBlock(blocks[i], options);
+          }
+        }
+      }
+    } catch (e) {
+        w.console.error('hljs-lang error: ', e);
+    }
+  }
+
+  function isPluginDisabledForBlock(element) {
+    return element.classList.contains('nohljslang');
+  }
+
+  function initLangBlock (element, options) {
     if (typeof element !== 'object') return;
 
-    var classes = element.className.split(' ');
-    var lang = getLangNameFromClasses(classes);
+    var lang = getLangNameFromElement(element);
+    var internalOptions = mapOptions(element, lang, options);
 
     if (lang !== '') {
       var langPanel = document.createElement('div');
       langPanel.className = 'hljs-lang';
-      langPanel.textContent = convertLangName(lang);
+      langPanel.textContent = convertLangName(lang, internalOptions.overrideNames);
       element.parentNode.insertBefore(langPanel, element);
     }
+  }
+
+  /**
+   * @param {HTMLElement} element Code block.
+   * @param {Object} options External API options.
+   * @returns {Object} Internal API options.
+   */
+  function mapOptions (element, langKey, options) {
+    options = options || {};
+    return {
+      overrideNames: getOverrideNamesOption(element, langKey, options),
+    };
+  }
+
+  function getOverrideNamesOption (element, langKey, options) {
+    var overrideNames = {};
+
+    if (!!options.overrideNames) {
+      overrideNames = options.overrideNames;
+    }
+
+    // can be overridden because local option is priority
+    var value = getAttribute(element, 'data-lang-name');
+    if (!!value) {
+      var opts = {};
+      opts[langKey] = value;
+      overrideNames = opts;
+    }
+
+    return overrideNames;
+  }
+
+  function getLangNameFromElement (element) {
+    var classes = element.className.split(' ');
+    var lang = getLangNameFromClasses(classes);
+    return lang;
   }
 
   function getLangNameFromClasses(classes) {
@@ -46,23 +104,28 @@
     return '';
   }
 
-  // TODO: rework this crap
-  function convertLangName(lang)
+  function convertLangName(langKey, overrideNamesMap)
   {
-    // TODO: add more langs
-    var map = [
-      ['C#', ['cs', 'csharp']],
-      ['F#', ['fsharp']],
-      ['Objective-C', ['objectivec']]
-    ];
+    var overriddenLangName = overrideNamesMap[langKey];
+    if (!!overriddenLangName) {
+      return overriddenLangName;
+    }
 
-    map.forEach(function (e) {
-      if (e[1].indexOf(lang) !== -1) {
-        lang = e[0];
-        return;
-      }
-    });
-    return lang;
+    var langName = defaultLangNamesMap[langKey];
+    if (!!langName) {
+      return langName;
+    }
+
+    return langKey;
   }
 
-}(window));
+  /**
+   * @param {HTMLElement} element Code block.
+   * @param {String} attrName Attribute name.
+   * @returns {String} Attribute value or empty.
+   */
+  function getAttribute (element, attrName) {
+    return element.hasAttribute(attrName) ? element.getAttribute(attrName) : null;
+  }
+
+}(window, document));
