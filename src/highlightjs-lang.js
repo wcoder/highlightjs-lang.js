@@ -3,6 +3,7 @@
 
   // TODO: add more langs
   var defaultLangNamesMap = {
+    cpp: 'C++',
     cs: 'C#',
     csharp: 'C#',
     fsharp: 'F#',
