@@ -56,7 +56,7 @@
     if (lang !== '') {
       var langPanel = document.createElement('div');
       langPanel.className = 'hljs-lang';
-      langPanel.textContent = convertLangName(lang, internalOptions.overrideNames);
+      langPanel.textContent = convertLangName(lang, internalOptions);
       element.parentNode.insertBefore(langPanel, element);
     }
   }
@@ -70,6 +70,7 @@
     options = options || {};
     return {
       overrideNames: getOverrideNamesOption(element, langKey, options),
+      fallback: getFallbackOption(options),
     };
   }
 
@@ -91,6 +92,23 @@
     return overrideNames;
   }
 
+  function getFallbackOption (options) {
+    return !!options.fallback
+      ? options.fallback
+      : defaultFallbackOption;
+  }
+
+  function defaultFallbackOption (codeLang) {
+    if (!!codeLang) {
+      var lang = codeLang.trim();
+      if (lang.length > 0) {
+        lang[0] = lang[0].toUpperCase();
+        return lang;
+      }
+    }
+    return codeLang;
+  }
+
   function getLangNameFromElement (element) {
     var classes = element.className.split(' ');
     var lang = getLangNameFromClasses(classes);
@@ -105,9 +123,9 @@
     return '';
   }
 
-  function convertLangName(langKey, overrideNamesMap)
+  function convertLangName(langKey, options)
   {
-    var overriddenLangName = overrideNamesMap[langKey];
+    var overriddenLangName = options.overrideNames[langKey];
     if (!!overriddenLangName) {
       return overriddenLangName;
     }
@@ -117,7 +135,7 @@
       return langName;
     }
 
-    return langKey;
+    return options.fallback(langKey);
   }
 
   /**
