@@ -98,15 +98,8 @@
       : defaultFallbackOption;
   }
 
-  function defaultFallbackOption (codeLang) {
-    if (!!codeLang) {
-      var lang = codeLang.trim();
-      if (lang.length > 0) {
-        lang[0] = lang[0].toUpperCase();
-        return lang;
-      }
-    }
-    return codeLang;
+  function defaultFallbackOption (langKey) {
+    return langKey;
   }
 
   function getLangNameFromElement (element) {

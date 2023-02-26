@@ -17,11 +17,19 @@
   <script src="dist/highlightjs-lang.min.js"></script>
   <script>
     hljs.highlightAll();
+
+    // init plugin:
     hljs.initLangOnLoad(
     {
       overrideNames: {
-        cpp: 'C++',
-      }
+        dart: 'Dart',
+      },
+      fallback: function (lang) {
+        if (lang === 'php') {
+          return '$ PHP $';
+        }
+        return lang;
+      },
     }
     );
   </script>
