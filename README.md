@@ -2,7 +2,7 @@
 
 [Highlight.js](https://github.com/highlightjs/highlight.js) plugin for display language of syntax highlight.
 
-[DEMO](http://wcoder.github.io/highlightjs-lang.js/)
+[DEMO](https://wcoder.github.io/highlightjs-lang.js/)
 
 ## Install
 
