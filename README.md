@@ -12,19 +12,13 @@
 npm i highlightjs-lang.js
 ```
 
-### Bower
-
-```bash
-bower install highlightjs-lang
-```
-
 #### Getting the library from CDN
 
 ```html
-<script src="//cdn.jsdelivr.net/npm/highlightjs-lang.js@1.1.0/dist/highlightjs-lang.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlightjs-lang.js@latest/dist/highlightjs-lang.min.js"></script>
 ```
 
-highlightjs-lang.js 1.1.0 is known to work with highlight.js 11.3.1.
+highlightjs-lang.js 1.1.0 is known to work with highlight.js 11.3.1+
 
 ## Usage
 
@@ -33,6 +27,7 @@ Download plugin and include file after highlight.js:
 ```html
 <script src="path/to/highlight.min.js"></script>
 
+<!-- Load plugin: -->
 <script src="path/to/highlightjs-lang.min.js"></script>
 ```
 
@@ -57,7 +52,7 @@ Initialize plugin after highlight.js:
 ```js
 hljs.highlightAll();
 
-hljs.initLangOnLoad();
+hljs.initLangOnLoad();  //  <-- init plugin
 ```
 
 Here’s an equivalent way to calling `initLangBlock` using jQuery:
@@ -77,6 +72,7 @@ After version 1.1.0 plugin has optional parameter `options` - for custom setup:
 version | name          | type    | default value | description
 --------|---------------|---------|---------------|-----------------------
 v1.1.0  | overrideNames | object  | {}            | [Override the default language names](#overrideNames)
+v1.1.1  | fallback    | func(str): str | (lang) => lang | [Fallback to convert unknown names](#fallback)
 
 ### Examples of using
 
@@ -98,9 +94,11 @@ If you want to override the default language name, you can specify a _overridden
 
 ```js
 var myOptions = {
+    // ...
     overrideNames: {
         cs: 'C#',
-    }
+    },
+    // ...
 };
 ```
 
@@ -117,6 +115,26 @@ var myOptions = {
 In both cases language name will be `C#`.
 
 > [List of default language names](https://github.com/wcoder/highlightjs-lang.js/blob/master/src/highlightjs-lang.js#L4-L10)
+
+### fallback
+
+Specifying the desired format for undeclared language names:
+
+```js
+var myOptions = {
+  // ...
+  fallback: function (lang) {
+    return '~~' + lang;
+  },
+  // ...
+};
+```
+
+Convert all undeclared language names to names with `~~` prefix:
+
+```
+xyz -> ~~xyz
+```
 
 ## Skipping some blocks
 
