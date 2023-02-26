@@ -12,19 +12,13 @@
 npm i highlightjs-lang.js
 ```
 
-### Bower
-
-```bash
-bower install highlightjs-lang
-```
-
 #### Getting the library from CDN
 
 ```html
-<script src="//cdn.jsdelivr.net/npm/highlightjs-lang.js@1.1.0/dist/highlightjs-lang.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlightjs-lang.js@latest/dist/highlightjs-lang.min.js"></script>
 ```
 
-highlightjs-lang.js 1.1.0 is known to work with highlight.js 11.3.1.
+highlightjs-lang.js 1.1.0 is known to work with highlight.js 11.3.1+
 
 ## Usage
 
@@ -33,6 +27,7 @@ Download plugin and include file after highlight.js:
 ```html
 <script src="path/to/highlight.min.js"></script>
 
+<!-- Load plugin: -->
 <script src="path/to/highlightjs-lang.min.js"></script>
 ```
 
@@ -57,7 +52,7 @@ Initialize plugin after highlight.js:
 ```js
 hljs.highlightAll();
 
-hljs.initLangOnLoad();
+hljs.initLangOnLoad();  //  <-- init plugin
 ```
 
 Here’s an equivalent way to calling `initLangBlock` using jQuery:
@@ -99,9 +94,11 @@ If you want to override the default language name, you can specify a _overridden
 
 ```js
 var myOptions = {
+    // ...
     overrideNames: {
         cs: 'C#',
-    }
+    },
+    // ...
 };
 ```
 
